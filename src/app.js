@@ -58,6 +58,23 @@ app.get("/health", (_req, res) => {
   });
 });
 
+// — Root Route ————————————————————————————————————————————————————————
+app.get("/", (_req, res) => {
+    res.json({
+          success: true,
+          message: "Finance Dashboard API",
+          version: "1.0.0",
+          docs: {
+                  health: "/health",
+                  auth: "/api/auth/login  |  /api/auth/register",
+                  records: "/api/records",
+                  dashboard: "/api/dashboard",
+                  users: "/api/users",
+          },
+          frontend: process.env.FRONTEND_URL || "https://finance-frontend-one-tau.vercel.app",
+    });
+});
+
 // ── API Routes ────────────────────────────────────────────────────────────────
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
